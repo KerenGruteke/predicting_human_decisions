@@ -1,0 +1,28 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "prediciting_human_decisions"
+version = "1.0.0"
+description = "prediciting_human_decisions"
+readme = "README.md"
+requires-python = ">=3.7"
+license = "CC-BY-4.0"
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: Other/Proprietary License", # For Creative Commons licenses
+  "Operating System :: OS Independent",
+]
+
+
+[project.urls]
+Homepage = ""
+repository = "https://github.com/KerenGruteke/predicting_human_decisions"
+"Bug Tracker" = ""
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
