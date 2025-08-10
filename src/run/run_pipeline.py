@@ -11,7 +11,7 @@ TRAIN_PROBLEMS_PATH = 'src/data/text_task/train_problems.csv'
 TEST_PROBLEMS_PATH = 'src/data/text_task/test_problems.csv'
 OUTPUT_DIR = 'src/results'
 
-def run_pipeline(exp_name, model_name, vectorize_type=None, embedding_type=None, enrich_type=None, embed_model=None, baseline_type=None, output_dir=OUTPUT_DIR):
+def run_pipeline(exp_name, model_name, vectorize_type=None, embedding_type=None, enrich_type=None, embed_model=None, baseline_type=None, ensemble_type=None, output_dir=OUTPUT_DIR):
     os.makedirs(output_dir, exist_ok=True)
     if embed_model is not None and enrich_type is not None:
         exp_name += f" | {embed_model}"
@@ -32,7 +32,8 @@ def run_pipeline(exp_name, model_name, vectorize_type=None, embedding_type=None,
         enrich_type=enrich_type,
         embedding_type=embedding_type,
         embed_model=embed_model,
-        baseline_type=baseline_type
+        baseline_type=baseline_type,
+        ensemble_type=ensemble_type
     )
     X_train, X_test, X_final_test = _validate_df_type(X_train, X_test, X_final_test, model_name, vectorize_type, embedding_type)
     
@@ -74,12 +75,16 @@ def plot_embeddings(embedding_type, embed_model, is_3d, output_dir=OUTPUT_DIR):
 
 if __name__ == "__main__":
     
-    for baseline_type in ["length"]:
-        run_pipeline(exp_name="ridge_length", model_name="ridge", baseline_type=baseline_type)
-        run_pipeline(exp_name="xgboost_length", model_name="xgboost", baseline_type=baseline_type)
-        run_pipeline(exp_name="random_forest_length", model_name="random_forest", baseline_type=baseline_type)
-        run_pipeline(exp_name="tabpfn_length", model_name="tabpfn", baseline_type=baseline_type)
-        run_pipeline(exp_name="tabstar_length", model_name="tabstar", baseline_type=baseline_type)
+    # ---------------------
+    # Baseline Models
+    # ---------------------
+    
+    # for baseline_type in ["length"]:
+    #     run_pipeline(exp_name="ridge_length", model_name="ridge", baseline_type=baseline_type)
+    #     run_pipeline(exp_name="xgboost_length", model_name="xgboost", baseline_type=baseline_type)
+    #     run_pipeline(exp_name="random_forest_length", model_name="random_forest", baseline_type=baseline_type)
+    #     run_pipeline(exp_name="tabpfn_length", model_name="tabpfn", baseline_type=baseline_type)
+    #     run_pipeline(exp_name="tabstar_length", model_name="tabstar", baseline_type=baseline_type)
 
     # ---------------------
     # TF-IDF Vectorization
@@ -199,9 +204,13 @@ if __name__ == "__main__":
         # run_pipeline(exp_name=f"tabstar_enrich_optimism_key_words_include_A_B | {embed_model}", model_name="tabstar", enrich_type="optimism_key_words_include_A_B", embed_model=embed_model)
     # run_pipeline(exp_name="tabstar_embed_A_minus_B_enrich_not_sure_key_words_include_A_B", model_name="tabstar", enrich_type="not_sure_key_words_include_A_B", embed_model='all-mpnet-base-v2', embedding_type="A_minus_B")
 
-    
-
     # run_pipeline(exp_name="tabstar_A_B_only", model_name="tabstar", enrich_type="A_B_only")
+    
+    # ---------------------
+    # Ensemble Models
+    # ---------------------
+    
+    run_pipeline(exp_name="tabpfn_ensemble_key_words", model_name="tabpfn", ensemble_type="key_words", embed_model="all-mpnet-base-v2")
     
     # ---------------------
     # Plot MSE
