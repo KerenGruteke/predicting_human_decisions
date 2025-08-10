@@ -5,8 +5,7 @@ import time
 import google.generativeai as genai
 from groq import Groq
 from tqdm import tqdm
-from src.annotate.parse_results import parse_results
-from src.annotate.prompts import get_sample_prompt
+from src.annotate.utils import _out_paths, _load_existing, _existing_key, _rows_to_process, _annotate_one, _append_and_atomic_save
 
 # Set up API clients
 def read_api_key(file_path):
@@ -21,7 +20,7 @@ GEMINI_KEY_PATH = os.path.join('API_keys', 'gemini_api_key.txt')
 GEMINI_API_KEY = read_api_key(GEMINI_KEY_PATH)
 genai.configure(api_key=GEMINI_API_KEY)
 
-def get_llama_response(sample_prompt, model_name='llama-3.1-70b-versatile'):
+def get_llama_response(sample_prompt, model_name='llama3-70b-8192'):
     response = groq_client.chat.completions.create(
         model=model_name,
         messages=[
@@ -33,47 +32,63 @@ def get_llama_response(sample_prompt, model_name='llama-3.1-70b-versatile'):
     )
     return response.choices[0].message.content
 
-def get_gemini_response(sample_prompt, model_name='gemini-1.5-flash'):
+def get_gemini_response(sample_prompt, model_name='gemini-2.5-flash-lite'):
     model = genai.GenerativeModel(model_name)
     response = model.generate_content(sample_prompt)
     return response.text
 
 # Main processing function
-def annotate_df_by_task(df, split_name, task):
-    # Define model configurations
-    models = [
-        ('gemini', lambda x: get_gemini_response(x)),
-        ('llama', lambda x: get_llama_response(x)),
-    ]
 
-    results = []
+def annotate_df_by_task(
+    df: pd.DataFrame,
+    split_name: str,
+    task: str,
+    save_dir: str = "src/annotate",
+    sleep_sec: int = 2,
+    flush_every: int = 5
+):
+    """
+    Annotate (problem_num, model, task) with LLM outputs.
+    - Resumes: loads existing {split_name}_{task}_results.csv and skips already-done rows.
+    - Writes atomically, flushes periodically.
+    """
+
+    buffered = []
     
+    models = [
+        ('llama', lambda x: get_llama_response(x)),
+        ('gemini', lambda x: get_gemini_response(x)),
+    ]
+    model_names = [name for name, _ in models]
+    print(model_names)
+
     for model_name, get_response in models:
-        for index, row in tqdm(df.iterrows(), desc=f"Processing {model_name}"):
-            A_offer = row['A']
-            B_offer = row['B']
-            problem_num = row['problem_num']
-            
-            sample_prompt = get_sample_prompt(A_offer, B_offer, task)
-            
-            try:
-                result = get_response(sample_prompt)
-                parsed_result = parse_results(result, task)
-                print(parsed_result, "\n")
-
-                results.append((problem_num, A_offer, B_offer, model_name, parsed_result))
-            except Exception as e:
-                print(f"Error processing row {index} with {model_name}: {e}")
-                results.append((problem_num, A_offer, B_offer, model_name, None))
-
-            # Add delay between API calls to respect rate limits
-            time.sleep(5)
+        out_path, tmp_path = _out_paths(save_dir, split_name, task, model_name)
+        existing = _load_existing(out_path)
+        keys = _existing_key(existing, task)
         
-    # convert to DataFrame
-    results_df = pd.DataFrame(results, columns=['problem_num', 'A_offer', 'B_offer', 'model', 'result'])
+        # decide what to annotate
+        todo = list(_rows_to_process(df, model_name, keys, task))
+        if not todo:
+            print(f"[{model_name}] nothing to do — all rows already annotated for '{task}'.")
+            continue
 
-    # Save results to CSV
-    results_df.to_csv(f'src/annotate/{split_name}_results.csv', index=False)
+        print(f"[{model_name}] annotating {len(todo)} missing rows for task '{task}'...")
+        for idx, row in tqdm(todo, desc=f"Processing {model_name}", unit="ex"):
+            rec = _annotate_one(row, model_name, task, get_response)
+            buffered.append(rec)
+
+            # periodic flush
+            if len(buffered) >= flush_every:
+                existing = _append_and_atomic_save(existing, buffered, out_path, tmp_path)
+                keys = _existing_key(existing, task)  # refresh
+                buffered = []
+
+            time.sleep(sleep_sec)
+
+    # final flush
+    _append_and_atomic_save(existing, buffered, out_path, tmp_path)
+
 
 def annotate_dfs(task):
     train_test_file = "src/data/text_task/train_problems.csv"
