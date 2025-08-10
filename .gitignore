@@ -7,3 +7,4 @@ __pycache__
 *.Rproj.user
 
 *rawData_Comp_All.csv
+*.joblib
