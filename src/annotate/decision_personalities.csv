@@ -1,0 +1,21 @@
+ID,Personality Name,Description,Bias / Heuristic
+0,Risk-Averse Rationalist,"Prefers certain outcomes, avoids risk even when expected value is higher.",Ambiguity Aversion
+1,Thrill-Seeking Optimist,Chooses risky options with small chance of large reward.,Overweighting Small Probabilities
+2,The Minimizer,Focuses on avoiding the worst possible outcome.,Minimax Strategy
+3,Expected Value Calculator,Tries to calculate implied averages logically from text.,Rational Agent
+4,Sure-Thing Lover,Strongly favors guaranteed payoffs.,Certainty Effect
+5,The Pessimist,Avoids options with any chance of bad outcomes.,Negativity Bias
+6,Framing Follower,Decisions shaped by wording or structure of the descriptions.,Framing Effect
+7,Regret Minimizer,"Chooses to avoid future regret, even at cost of expected value.",Regret Theory
+8,Fairness Fanatic,Avoids options that sound unfair or unevenly distributed.,Equity Sensitivity
+9,Availability Thinker,Overweighs vivid or memorable outcomes.,Availability Heuristic
+10,Extremes Attractor,"Drawn to large or extreme numbers, regardless of probability.",Salience Bias
+11,Loss Averse,"Avoids options with potential losses, even small ones.",Loss Aversion
+12,Authority Believer,Influenced by scientific or official-sounding language.,Authority Bias
+13,Default Chooser,Picks first/neutral/default option without deeper processing.,Status Quo Bias
+14,Pattern Seeker,Infers hidden structure or patterns from the phrasing.,Illusory Pattern Detection
+15,Emotional Reactor,"Reacts to emotionally charged words ('never', 'sure', 'win').",Affect Heuristic
+16,Recency Thinker,Guided by most recent personal experiences with risk.,Recency Effect
+17,Word-Count Heuristic User,Avoids long or complex-sounding descriptions.,Cognitive Load Heuristic
+18,Imagination-Based Thinker,Chooses based on ease of imagining the outcomes.,Simulation Heuristic
+19,Random Chooser,Makes noisy or disengaged choices; no stable strategy.,Noise / Randomness
