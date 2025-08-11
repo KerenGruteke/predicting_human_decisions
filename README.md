@@ -1,6 +1,6 @@
 # Predicting Human Decisions
 
-A machine learning project for predicting human decision-making behavior in risky choice tasks using both traditional behavioral models and modern embedding-based approaches.
+A machine learning project for predicting human decision-making behavior in risky choice tasks.
 
 ## Dataset
 
