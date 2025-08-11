@@ -143,9 +143,9 @@ if __name__ == "__main__":
     
     # A minus B
     # for embed_model in ['all-mpnet-base-v2']: #['all-MiniLM-L6-v2', 'all-mpnet-base-v2', 'all-distilroberta-v1']
-    #     run_pipeline(exp_name=f"ridge_embed_A_minus_B | {embed_model}", model_name="ridge", embedding_type="A_minus_B", embed_model=embed_model)
-    #     run_pipeline(exp_name=f"xgboost_embed_A_minus_B | {embed_model}", model_name="xgboost", embedding_type="A_minus_B", embed_model=embed_model)
-    #     run_pipeline(exp_name=f"random_forest_embed_A_minus_B | {embed_model}", model_name="random_forest", embedding_type="A_minus_B", embed_model=embed_model)
+        # run_pipeline(exp_name=f"ridge_embed_A_minus_B | {embed_model}", model_name="ridge", embedding_type="A_minus_B", embed_model=embed_model)
+        # run_pipeline(exp_name=f"xgboost_embed_A_minus_B | {embed_model}", model_name="xgboost", embedding_type="A_minus_B", embed_model=embed_model)
+        # run_pipeline(exp_name=f"random_forest_embed_A_minus_B | {embed_model}", model_name="random_forest", embedding_type="A_minus_B", embed_model=embed_model)
         # run_pipeline(exp_name=f"tabpfn_embed_A_minus_B | {embed_model}", model_name="tabpfn", embedding_type="A_minus_B", embed_model=embed_model)
         # run_pipeline(exp_name=f"tabstar_embed_A_minus_B | {embed_model}", model_name="tabstar", embedding_type="A_minus_B", embed_model=embed_model)
     
@@ -164,13 +164,13 @@ if __name__ == "__main__":
     # Enrichment with Key Words
     # ---------------------
     # vector size 125 * 3 = 375 (A, B, A-B)
-    # for embed_model in ['all-MiniLM-L6-v2']: # 'all-mpnet-base-v2', 'all-distilroberta-v1', 
-    #     for enrich_type in ["not_sure_key_words", "key_words"]:
-            # run_pipeline(exp_name=f"ridge_enrich_{enrich_type}", model_name="ridge", enrich_type=enrich_type, embed_model=embed_model)
-            # run_pipeline(exp_name=f"xgboost_enrich_{enrich_type}", model_name="xgboost", enrich_type=enrich_type, embed_model=embed_model)
-            # run_pipeline(exp_name=f"random_forest_enrich_{enrich_type}", model_name="random_forest", enrich_type=enrich_type, embed_model=embed_model)
-            # run_pipeline(exp_name=f"tabpfn_enrich_{enrich_type}", model_name="tabpfn", enrich_type=enrich_type, embed_model=embed_model)
-            # run_pipeline(exp_name=f"tabstar_enrich_{enrich_type}", model_name="tabstar", enrich_type=enrich_type, embed_model=embed_model)
+    # for embed_model in ['all-mpnet-base-v2']: # all-MiniLM-L6-v2', 'all-distilroberta-v1', 
+    #     for enrich_type in ["key_words", "risk_key_words"]:
+    #         run_pipeline(exp_name=f"ridge_enrich_{enrich_type}", model_name="ridge", enrich_type=enrich_type, embed_model=embed_model)
+    #         run_pipeline(exp_name=f"xgboost_enrich_{enrich_type}", model_name="xgboost", enrich_type=enrich_type, embed_model=embed_model)
+    #         run_pipeline(exp_name=f"random_forest_enrich_{enrich_type}", model_name="random_forest", enrich_type=enrich_type, embed_model=embed_model)
+    #         run_pipeline(exp_name=f"tabpfn_enrich_{enrich_type}", model_name="tabpfn", enrich_type=enrich_type, embed_model=embed_model)
+    #         run_pipeline(exp_name=f"tabstar_enrich_{enrich_type}", model_name="tabstar", enrich_type=enrich_type, embed_model=embed_model)
             
             # run_pipeline(exp_name=f"tabstar_enrich_{enrich_type}_include_A_B", model_name="tabstar", enrich_type=f"{enrich_type}_include_A_B", embed_model=embed_model)
 
@@ -205,13 +205,20 @@ if __name__ == "__main__":
     # run_pipeline(exp_name="tabstar_embed_A_minus_B_enrich_not_sure_key_words_include_A_B", model_name="tabstar", enrich_type="not_sure_key_words_include_A_B", embed_model='all-mpnet-base-v2', embedding_type="A_minus_B")
 
     # run_pipeline(exp_name="tabstar_A_B_only", model_name="tabstar", enrich_type="A_B_only")
-    
+
     # ---------------------
     # Ensemble Models
     # ---------------------
     
-    run_pipeline(exp_name="tabpfn_ensemble_key_words", model_name="tabpfn", ensemble_type="key_words", embed_model="all-mpnet-base-v2")
+    # for model_name in ["ridge", "xgboost", "random_forest", "tabpfn", "tabstar"]:
+    #     # run_pipeline(exp_name=f"{model_name}_ensemble_key_words", model_name=model_name, ensemble_type="key_words", embed_model="all-mpnet-base-v2")
+        # run_pipeline(exp_name=f"{model_name}_ensemble_key_words_and_embed_A_minus_B", model_name=model_name, ensemble_type="key_words_and_embed_A_minus_B", embed_model="all-mpnet-base-v2")
+        # run_pipeline(exp_name=f"{model_name}_ensemble_key_words_and_embed_A_minus_B_include_A_and_B", model_name=model_name, ensemble_type="key_words_and_embed_A_minus_B_include_A_and_B", embed_model="all-mpnet-base-v2")
     
+    
+    run_pipeline(exp_name="tabstar_ensemble_key_words_and_embed_A_minus_B_include_A_and_B_and_raw_A_B", model_name="tabstar", ensemble_type="key_words_and_embed_A_minus_B_include_A_and_B_and_raw_A_B", embed_model="all-mpnet-base-v2")
+
+
     # ---------------------
     # Plot MSE
     # ---------------------

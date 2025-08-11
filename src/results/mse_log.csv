@@ -198,4 +198,60 @@ datetime,model_name,train_mse,test_mse,exp_name
 2025-08-10T14:26:34,xgboost,0.0466097921044188,0.0906449763841943,xgboost_length
 2025-08-10T14:26:35,random_forest,0.0436804746542907,0.0944317863031111,random_forest_length
 2025-08-10T14:26:37,tabpfn,0.0748756135450288,0.0728284423633892,tabpfn_length
-2025-08-10T14:26:44,tabstar,0.07536718153388412,0.07275033207045663,tabstar_length
+2025-08-10T14:26:44,tabstar,0.0753671815338841,0.0727503320704566,tabstar_length
+2025-08-11T12:03:33,ridge,0.0281118488222982,0.0277995397800491,ridge_enrich_risk_key_words | all-mpnet-base-v2
+2025-08-11T12:03:55,xgboost,0.0001160843723582,0.0336716547313608,xgboost_enrich_risk_key_words | all-mpnet-base-v2
+2025-08-11T12:04:13,random_forest,0.006256095892019,0.0372909932092306,random_forest_enrich_risk_key_words | all-mpnet-base-v2
+2025-08-11T12:04:36,tabpfn,0.0239048144840318,0.0275305515208766,tabpfn_enrich_risk_key_words | all-mpnet-base-v2
+2025-08-11T12:05:52,tabstar,0.0308562467081073,0.0368731540844522,tabstar_enrich_risk_key_words | all-mpnet-base-v2
+2025-08-11T12:06:12,ridge,0.026051249054994,0.0276475325956344,ridge_enrich_key_words | all-mpnet-base-v2
+2025-08-11T12:06:31,xgboost,7.232635402258536e-05,0.0323979266499917,xgboost_enrich_key_words | all-mpnet-base-v2
+2025-08-11T12:06:50,random_forest,0.0061782351872131,0.0349825780921627,random_forest_enrich_key_words | all-mpnet-base-v2
+2025-08-11T12:07:14,tabpfn,0.0245279816657482,0.0273135980119787,tabpfn_enrich_key_words | all-mpnet-base-v2
+2025-08-11T12:08:56,tabstar,0.0295913234993033,0.0323292298730297,tabstar_enrich_key_words | all-mpnet-base-v2
+2025-08-11T12:15:58,tabpfn,0.0752585881742694,0.0726476108729103,tabpfn_ensemble_key_words
+2025-08-11T12:17:31,tabpfn,0.0752585881742694,0.0726476108729103,tabpfn_ensemble_key_words
+2025-08-11T12:18:02,tabpfn,0.0752585881742694,0.0726476108729103,tabpfn_ensemble_key_words
+2025-08-11T12:18:03,tabpfn,0.0752585881742694,0.0726476108729103,tabpfn_ensemble_key_words
+2025-08-11T12:18:04,tabpfn,0.0752585881742694,0.0726476108729103,tabpfn_ensemble_key_words
+2025-08-11T12:18:05,tabpfn,0.0752585881742694,0.0726476108729103,tabpfn_ensemble_key_words
+2025-08-11T12:18:06,tabpfn,0.0752585881742694,0.0726476108729103,tabpfn_ensemble_key_words
+2025-08-11T12:18:41,ridge,0.0746483976549057,0.0745254850071934,ridge_ensemble_key_words
+2025-08-11T12:18:41,xgboost,0.0090963019382083,0.0811509321893795,xgboost_ensemble_key_words
+2025-08-11T12:18:42,random_forest,0.0137543784152964,0.0763134799269954,random_forest_ensemble_key_words
+2025-08-11T12:18:43,tabpfn,0.0752585881742694,0.0726476108729103,tabpfn_ensemble_key_words
+2025-08-11T12:18:51,tabstar,0.0731365980780566,0.0723315565649668,tabstar_ensemble_key_words
+2025-08-11T13:32:23,ridge,0.0207528379912558,0.0292700590609143,ridge_embed_A_minus_B | all-mpnet-base-v2
+2025-08-11T13:32:41,xgboost,1.3815619197554811e-05,0.0313982185931538,xgboost_embed_A_minus_B | all-mpnet-base-v2
+2025-08-11T13:32:58,random_forest,0.0065915001313604,0.037546112252887,random_forest_embed_A_minus_B | all-mpnet-base-v2
+2025-08-11T13:46:27,ridge,0.0207528379912558,0.0292700590609143,ridge_embed_A_minus_B | all-mpnet-base-v2
+2025-08-11T13:46:44,xgboost,1.3815619197554811e-05,0.0313982185931538,xgboost_embed_A_minus_B | all-mpnet-base-v2
+2025-08-11T13:47:01,random_forest,0.0065915001313604,0.037546112252887,random_forest_embed_A_minus_B | all-mpnet-base-v2
+2025-08-11T13:51:28,tabpfn,0.0235945491224225,0.0263521911091117,tabpfn_embed_A_minus_B | all-mpnet-base-v2
+2025-08-11T13:57:00,tabstar,0.0182528554599235,0.0390157691834742,tabstar_embed_A_minus_B | all-mpnet-base-v2
+2025-08-11T13:57:41,ridge,0.0746483976549057,0.0745254850071934,ridge_ensemble_key_words_and_embed_A_minus_B
+2025-08-11T13:57:41,xgboost,0.0090963019382083,0.0811509321893795,xgboost_ensemble_key_words_and_embed_A_minus_B
+2025-08-11T13:57:42,random_forest,0.0137543784152964,0.0763134799269954,random_forest_ensemble_key_words_and_embed_A_minus_B
+2025-08-11T13:57:44,tabpfn,0.0752585881742694,0.0726476108729103,tabpfn_ensemble_key_words_and_embed_A_minus_B
+2025-08-11T13:58:33,ridge,0.0743375257996419,0.0740236095064056,ridge_ensemble_key_words_and_embed_A_minus_B
+2025-08-11T13:58:34,xgboost,0.0047677017306296,0.0801335971835559,xgboost_ensemble_key_words_and_embed_A_minus_B
+2025-08-11T13:58:35,random_forest,0.0125844540843859,0.0758343251508487,random_forest_ensemble_key_words_and_embed_A_minus_B
+2025-08-11T13:58:36,tabpfn,0.0750433480065927,0.0726255475965266,tabpfn_ensemble_key_words_and_embed_A_minus_B
+2025-08-11T13:58:44,tabstar,0.0770861871038837,0.0720051824580298,tabstar_ensemble_key_words_and_embed_A_minus_B
+2025-08-11T14:04:41,tabstar,0.0080190687476984,0.023112936392265,tabstar_A_B_only
+2025-08-11T14:05:50,ridge,0.0743375257996419,0.0740236095064056,ridge_ensemble_key_words_and_embed_A_minus_B_include_A_and_B
+2025-08-11T14:05:51,xgboost,0.0047677017306296,0.0801335971835559,xgboost_ensemble_key_words_and_embed_A_minus_B_include_A_and_B
+2025-08-11T14:05:51,random_forest,0.0125844540843859,0.0758343251508487,random_forest_ensemble_key_words_and_embed_A_minus_B_include_A_and_B
+2025-08-11T14:05:53,tabpfn,0.0750433480065927,0.0726255475965266,tabpfn_ensemble_key_words_and_embed_A_minus_B_include_A_and_B
+2025-08-11T14:06:02,tabstar,0.0770815628430872,0.071583679496977,tabstar_ensemble_key_words_and_embed_A_minus_B_include_A_and_B
+2025-08-11T14:07:21,ridge,0.0743190222735504,0.0740094848138543,ridge_ensemble_key_words_and_embed_A_minus_B_include_A_and_B
+2025-08-11T14:07:22,xgboost,0.0058896257947578,0.0840096555156366,xgboost_ensemble_key_words_and_embed_A_minus_B_include_A_and_B
+2025-08-11T14:07:23,random_forest,0.0128928461090889,0.0736019354597289,random_forest_ensemble_key_words_and_embed_A_minus_B_include_A_and_B
+2025-08-11T14:07:24,tabpfn,0.0750893135013089,0.0726471436234587,tabpfn_ensemble_key_words_and_embed_A_minus_B_include_A_and_B
+2025-08-11T14:07:32,tabstar,0.0767531850045993,0.0740664132234785,tabstar_ensemble_key_words_and_embed_A_minus_B_include_A_and_B
+2025-08-11T14:07:45,ridge,0.0743190222735504,0.0740094848138543,ridge_ensemble_key_words_and_embed_A_minus_B_include_A_and_B
+2025-08-11T14:07:46,xgboost,0.0058896257947578,0.0840096555156366,xgboost_ensemble_key_words_and_embed_A_minus_B_include_A_and_B
+2025-08-11T14:07:47,random_forest,0.0128928461090889,0.0736019354597289,random_forest_ensemble_key_words_and_embed_A_minus_B_include_A_and_B
+2025-08-11T14:07:48,tabpfn,0.0750893135013089,0.0726471436234587,tabpfn_ensemble_key_words_and_embed_A_minus_B_include_A_and_B
+2025-08-11T14:07:57,tabstar,0.0769429626084551,0.0743787302239736,tabstar_ensemble_key_words_and_embed_A_minus_B_include_A_and_B
+2025-08-11T14:11:25,tabstar,0.01546954687464622,0.028004467055040096,tabstar_ensemble_key_words_and_embed_A_minus_B_include_A_and_B_and_raw_A_B

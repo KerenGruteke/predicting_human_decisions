@@ -99,7 +99,7 @@ def process_data(train_data, test_data, final_test_data, vectorize_type: str, en
         
         return train_data, test_data, final_test_data, None
     
-    elif "key_words" in enrich_type:
+    elif enrich_type is not None and "key_words" in enrich_type:
         # embed A and B, and measure for each embedding the cosine similiarity with the key words embeddings
         
         # define key words
@@ -298,7 +298,7 @@ def process_data(train_data, test_data, final_test_data, vectorize_type: str, en
         return train_data, test_data, final_test_data, None
         
         
-    elif ensemble_type == "key_words":
+    elif "key_words" in ensemble_type:
         # take the predictions of a lot of models as features
         
         # list of experiments to include
@@ -324,7 +324,7 @@ def process_data(train_data, test_data, final_test_data, vectorize_type: str, en
                 # load the predictions
                 train_preds_path = f"src/results/{model}_{enrich_type} | {embed_model}/{model}_train_results.csv"
                 test_preds_path = f"src/results/{model}_{enrich_type} | {embed_model}/{model}_test_results.csv"
-                final_test_preds_path = f"src/results/{model}_{enrich_type} | {embed_model}/{model}_final_test_results.csv"
+                final_test_preds_path = f"src/results/{model}_{enrich_type} | {embed_model}/{model}_predictions.csv"
 
                 train_preds_df = get_exp_results_file(train_preds_path)
                 test_preds_df = get_exp_results_file(test_preds_path)
@@ -337,22 +337,78 @@ def process_data(train_data, test_data, final_test_data, vectorize_type: str, en
                 if not final_test_df.empty:
                     final_test_dfs.append(final_test_df['prediction'])
                     
+        if "embed_A_minus_B" in ensemble_type:
+            for model in models:
+                # load the predictions
+                train_preds_path = f"src/results/{model}_embed_A_minus_B | {embed_model}/{model}_train_results.csv"
+                test_preds_path = f"src/results/{model}_embed_A_minus_B | {embed_model}/{model}_test_results.csv"
+                final_test_preds_path = f"src/results/{model}_embed_A_minus_B | {embed_model}/{model}_predictions.csv"
+
+                train_preds_df = get_exp_results_file(train_preds_path)
+                test_preds_df = get_exp_results_file(test_preds_path)
+                final_test_df = get_exp_results_file(final_test_preds_path)
+
+                if not train_preds_df.empty:
+                    train_dfs.append(train_preds_df['predictions'])
+                if not test_preds_df.empty:
+                    test_dfs.append(test_preds_df['predictions'])
+                if not final_test_df.empty:
+                    final_test_dfs.append(final_test_df['prediction'])
+                    
+        if "include_A_and_B" in ensemble_type:
+            model = "tabstar"
+            # load the predictions
+            train_preds_path = f"src/results/{model}_A_B_only/{model}_train_results.csv"
+            test_preds_path = f"src/results/{model}_A_B_only/{model}_test_results.csv"
+            final_test_preds_path = f"src/results/{model}_A_B_only/{model}_predictions.csv"
+            
+            train_preds_df = get_exp_results_file(train_preds_path)
+            test_preds_df = get_exp_results_file(test_preds_path)
+            final_test_df = get_exp_results_file(final_test_preds_path)
+
+            if not train_preds_df.empty:
+                train_dfs.append(train_preds_df['predictions'])
+            if not test_preds_df.empty:
+                test_dfs.append(test_preds_df['predictions'])
+            if not final_test_df.empty:
+                final_test_dfs.append(final_test_df['prediction'])
+
         # concatenate the predictions
         if train_dfs:
             X_train = pd.concat(train_dfs, axis=1)
+            # change columns names to f"pred_{i}" where i is the index of the model
+            X_train.columns = [f"pred_{i}" for i in range(X_train.shape[1])]
         else:
-            X_train = pd.DataFrame()
+            X_train = pd.DataFrame()       
         
         if test_dfs:
             X_test = pd.concat(test_dfs, axis=1)
+            # change columns names to f"pred_{i}" where i is the index of the model
+            X_test.columns = [f"pred_{i}" for i in range(X_test.shape[1])]
         else:
             X_test = pd.DataFrame()
         
         if final_test_dfs:
             X_final_test = pd.concat(final_test_dfs, axis=1)
+            # change columns names to f"pred_{i}" where i is the index of the model
+            X_final_test.columns = [f"pred_{i}" for i in range(X_final_test.shape[1])]
         else:
             X_final_test = pd.DataFrame()
-        
+            
+        if "raw_A_B" in ensemble_type:
+            A_B_train = train_data[["A", "B"]]
+            A_B_test = test_data[["A", "B"]]
+            A_B_final_test = final_test_data[["A", "B"]]
+            # concatenate the raw A and B columns
+            X_train = pd.concat([X_train, A_B_train.reset_index(drop=True)], axis=1)
+            X_test = pd.concat([X_test, A_B_test.reset_index(drop=True)], axis=1)
+            X_final_test = pd.concat([X_final_test, A_B_final_test.reset_index(drop=True)], axis=1)
+            
+            # rename A and B columns to "Offer A" and "Offer B"
+            X_train.rename(columns={"A": "Offer A", "B": "Offer B"}, inplace=True)
+            X_test.rename(columns={"A": "Offer A", "B": "Offer B"}, inplace=True)
+            X_final_test.rename(columns={"A": "Offer A", "B": "Offer B"}, inplace=True)
+
         # log num of columns
         logger.info(f"Number of columns after ensemble for train: {X_train.shape[1]}")
         logger.info(f"Number of columns after ensemble for test: {X_test.shape[1]}")
@@ -492,45 +548,12 @@ def _validate_df_type(X_train, X_test, X_final_test, model_name, vectorize_type,
         
         # reduce dimension to 500 if needed
         if X_train.shape[1] > 500:
-            from sklearn.decomposition import PCA
+            # if pandas
+            if isinstance(X_train, pd.DataFrame):
+                X_train, X_test, X_final_test = do_PCA_for_df(X_train, X_test, X_final_test, target_dim=target_dim)
+            else:
+                X_train, X_test, X_final_test = do_PCA_for_numpy_array(X_train, X_test, X_final_test, target_dim=target_dim)
             
-            # Detect string (or categorical) columns
-            str_cols = X_train.select_dtypes(include=['object', 'string']).columns
-            k_str_cols = len(str_cols)
-            
-            logger.info(f"Found {k_str_cols} string columns: {list(str_cols)}")
-
-            # Separate numeric and string parts
-            X_train_str = X_train[str_cols].reset_index(drop=True)
-            X_test_str = X_test[str_cols].reset_index(drop=True)
-            X_final_test_str = X_final_test[str_cols].reset_index(drop=True)
-
-            X_train_num = X_train.drop(columns=str_cols)
-            X_test_num = X_test.drop(columns=str_cols)
-            X_final_test_num = X_final_test.drop(columns=str_cols)
-            
-            pca_components = max(target_dim - k_str_cols, 1)
-
-            # Apply PCA only to numeric features
-            pca = PCA(n_components=pca_components)
-            X_train_pca = pca.fit_transform(X_train_num)
-            X_test_pca = pca.transform(X_test_num)
-            X_final_test_pca = pca.transform(X_final_test_num)
-
-            # Convert PCA outputs to DataFrames for easy concat
-            pca_cols = [f"pca_{i}" for i in range(pca_components)]
-            X_train_pca_df = pd.DataFrame(X_train_pca, columns=pca_cols)
-            X_test_pca_df = pd.DataFrame(X_test_pca, columns=pca_cols)
-            X_final_test_pca_df = pd.DataFrame(X_final_test_pca, columns=pca_cols)
-
-            # Concatenate PCA features with original string columns
-            X_train = pd.concat([X_train_pca_df, X_train_str], axis=1)
-            X_test = pd.concat([X_test_pca_df, X_test_str], axis=1)
-            X_final_test = pd.concat([X_final_test_pca_df, X_final_test_str], axis=1)
-            
-            # log n cols
-            logger.info(f"Reduced dimensions to {X_train.shape[1]} columns after PCA, including {k_str_cols} string columns.")
-
         # if tabstar then convert to pandas DataFrame
         if model_name == "tabstar":
             X_train = pd.DataFrame(X_train)
@@ -545,3 +568,58 @@ def _validate_df_type(X_train, X_test, X_final_test, model_name, vectorize_type,
             X_final_test.columns = columns
 
     return X_train, X_test, X_final_test
+
+def do_PCA_for_df(X_train, X_test, X_final_test, target_dim):
+    from sklearn.decomposition import PCA
+    # Detect string (or categorical) columns
+    str_cols = X_train.select_dtypes(include=['object', 'string']).columns
+    k_str_cols = len(str_cols)
+    
+    logger.info(f"Found {k_str_cols} string columns: {list(str_cols)}")
+
+    # Separate numeric and string parts
+    X_train_str = X_train[str_cols].reset_index(drop=True)
+    X_test_str = X_test[str_cols].reset_index(drop=True)
+    X_final_test_str = X_final_test[str_cols].reset_index(drop=True)
+
+    X_train_num = X_train.drop(columns=str_cols)
+    X_test_num = X_test.drop(columns=str_cols)
+    X_final_test_num = X_final_test.drop(columns=str_cols)
+    
+    pca_components = max(target_dim - k_str_cols, 1)
+
+    # Apply PCA only to numeric features
+    pca = PCA(n_components=pca_components)
+    X_train_pca = pca.fit_transform(X_train_num)
+    X_test_pca = pca.transform(X_test_num)
+    X_final_test_pca = pca.transform(X_final_test_num)
+
+    # Convert PCA outputs to DataFrames for easy concat
+    pca_cols = [f"pca_{i}" for i in range(pca_components)]
+    X_train_pca_df = pd.DataFrame(X_train_pca, columns=pca_cols)
+    X_test_pca_df = pd.DataFrame(X_test_pca, columns=pca_cols)
+    X_final_test_pca_df = pd.DataFrame(X_final_test_pca, columns=pca_cols)
+
+    # Concatenate PCA features with original string columns
+    X_train = pd.concat([X_train_pca_df, X_train_str], axis=1)
+    X_test = pd.concat([X_test_pca_df, X_test_str], axis=1)
+    X_final_test = pd.concat([X_final_test_pca_df, X_final_test_str], axis=1)
+    
+    # log n cols
+    logger.info(f"Reduced dimensions to {X_train.shape[1]} columns after PCA, including {k_str_cols} string columns.")
+
+    return X_train, X_test, X_final_test
+
+def do_PCA_for_numpy_array(X_train, X_test, X_final_test, target_dim):
+    from sklearn.decomposition import PCA
+    
+    pca = PCA(n_components=target_dim)
+    X_train_pca = pca.fit_transform(X_train)
+    X_test_pca = pca.transform(X_test)
+    X_final_test_pca = pca.transform(X_final_test)
+    
+    logger.info(f"Reduced dimensions to {X_train_pca.shape[1]} columns after PCA.")
+    
+    return X_train_pca, X_test_pca, X_final_test_pca
+    
+    
