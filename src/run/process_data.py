@@ -27,7 +27,7 @@ def _embed_A_minus_B(train_data, test_data, final_test_data, embed_model):
     return A_minus_B_train, A_minus_B_test, A_minus_B_final_test
     
 
-def process_data(train_data, test_data, final_test_data, vectorize_type: str, enrich_type: str, embedding_type: str, baseline_type: str, embed_model='all-MiniLM-L6-v2'):
+def process_data(train_data, test_data, final_test_data, vectorize_type: str, enrich_type: str, embedding_type: str, baseline_type: str, ensemble_type: str, embed_model='all-MiniLM-L6-v2'):
     
     if baseline_type == "length":
         # add length of A and B as features
@@ -297,11 +297,80 @@ def process_data(train_data, test_data, final_test_data, vectorize_type: str, en
         # return the modified dataframes
         return train_data, test_data, final_test_data, None
         
+        
+    elif ensemble_type == "key_words":
+        # take the predictions of a lot of models as features
+        
+        # list of experiments to include
+        enrich_types = [
+            "enrich_key_words",
+            "enrich_risk_key_words"
+        ]
+        models = [
+            "ridge",
+            "xgboost",
+            "random_forest",
+            "tabpfn",
+            "tabstar",
+        ]
+        
+        # create a list to hold the dataframes
+        train_dfs = []
+        test_dfs = []
+        final_test_dfs = []
+        
+        for enrich_type in enrich_types:
+            for model in models:
+                # load the predictions
+                train_preds_path = f"src/results/{model}_{enrich_type} | {embed_model}/{model}_train_results.csv"
+                test_preds_path = f"src/results/{model}_{enrich_type} | {embed_model}/{model}_test_results.csv"
+                final_test_preds_path = f"src/results/{model}_{enrich_type} | {embed_model}/{model}_final_test_results.csv"
+
+                train_preds_df = get_exp_results_file(train_preds_path)
+                test_preds_df = get_exp_results_file(test_preds_path)
+                final_test_df = get_exp_results_file(final_test_preds_path)
+                
+                if not train_preds_df.empty:
+                    train_dfs.append(train_preds_df['predictions'])
+                if not test_preds_df.empty:
+                    test_dfs.append(test_preds_df['predictions'])
+                if not final_test_df.empty:
+                    final_test_dfs.append(final_test_df['prediction'])
+                    
+        # concatenate the predictions
+        if train_dfs:
+            X_train = pd.concat(train_dfs, axis=1)
+        else:
+            X_train = pd.DataFrame()
+        
+        if test_dfs:
+            X_test = pd.concat(test_dfs, axis=1)
+        else:
+            X_test = pd.DataFrame()
+        
+        if final_test_dfs:
+            X_final_test = pd.concat(final_test_dfs, axis=1)
+        else:
+            X_final_test = pd.DataFrame()
+        
+        # log num of columns
+        logger.info(f"Number of columns after ensemble for train: {X_train.shape[1]}")
+        logger.info(f"Number of columns after ensemble for test: {X_test.shape[1]}")
+        logger.info(f"Number of columns after ensemble for final test: {X_final_test.shape[1]}")
+        
+        return X_train, X_test, X_final_test, None
     else:
         raise ValueError("No valid processing type provided. Please specify vectorize_type, embedding_type, or enrich_type.")
     
-    
-    
+def get_exp_results_file(file_path):
+    if os.path.exists(file_path):
+        df = pd.read_csv(file_path)
+        if not df.empty:
+            return df
+    logger.warning(f"File {file_path} does not exist or is empty. Skipping.")
+    return pd.DataFrame()
+
+
 def _add_diff_columns(df, key_words):
     # Compute all diffs at once into a new DataFrame
     diff_cols = {
