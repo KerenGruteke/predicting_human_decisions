@@ -216,7 +216,17 @@ if __name__ == "__main__":
         # run_pipeline(exp_name=f"{model_name}_ensemble_key_words_and_embed_A_minus_B_include_A_and_B", model_name=model_name, ensemble_type="key_words_and_embed_A_minus_B_include_A_and_B", embed_model="all-mpnet-base-v2")
     
     
-    run_pipeline(exp_name="tabstar_ensemble_key_words_and_embed_A_minus_B_include_A_and_B_and_raw_A_B", model_name="tabstar", ensemble_type="key_words_and_embed_A_minus_B_include_A_and_B_and_raw_A_B", embed_model="all-mpnet-base-v2")
+    # run_pipeline(exp_name="tabstar_ensemble_key_words_and_embed_A_minus_B_include_A_and_B_and_raw_A_B", model_name="tabstar", ensemble_type="key_words_and_embed_A_minus_B_include_A_and_B_and_raw_A_B", embed_model="all-mpnet-base-v2")
+
+    # ---------------------
+    # LLMs Annotations Features
+    # ---------------------
+    
+    # for model_name in ["ridge", "xgboost", "random_forest", "tabpfn", "tabstar"]:
+    #     run_pipeline(exp_name=f"{model_name}_llm_annotations_values_and_prob", model_name=model_name, enrich_type="llm_annotations_values_and_prob")
+
+    run_pipeline(exp_name="tabstar_gemini_annotations_values_and_prob_include_A_B", model_name="tabstar", enrich_type="gemini_annotations_values_and_prob_include_A_B")
+    run_pipeline(exp_name="tabstar_llama_annotations_values_and_prob_include_A_B", model_name="tabstar", enrich_type="llama_annotations_values_and_prob_include_A_B")
 
 
     # ---------------------

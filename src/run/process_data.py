@@ -87,6 +87,18 @@ def process_data(train_data, test_data, final_test_data, vectorize_type: str, en
 
         return X_train, X_test, X_final_test, None
     
+    elif "annotations_values_and_prob" in enrich_type:
+        include_A_B_flag = ("include_A_B" in enrich_type)
+        gemini_flag = ("gemini" in enrich_type)
+        llama_flag = ("llama" in enrich_type)
+        
+        # add LLM annotations values and probabilities as features
+        X_train = _get_llm_annotations(train_data, split="train", include_A_B=include_A_B_flag, only_gemini=gemini_flag, only_llama=llama_flag)
+        X_test = _get_llm_annotations(test_data, split="train", include_A_B=include_A_B_flag, only_gemini=gemini_flag, only_llama=llama_flag)
+        X_final_test = _get_llm_annotations(final_test_data, split="test", include_A_B=include_A_B_flag, only_gemini=gemini_flag, only_llama=llama_flag)
+
+        return X_train, X_test, X_final_test, None
+
     elif enrich_type == "A_B_only":
         # keep only A and B columns
         selected_columns = ["A", "B"]
@@ -298,7 +310,7 @@ def process_data(train_data, test_data, final_test_data, vectorize_type: str, en
         return train_data, test_data, final_test_data, None
         
         
-    elif "key_words" in ensemble_type:
+    elif ensemble_type is not None and "key_words" in ensemble_type:
         # take the predictions of a lot of models as features
         
         # list of experiments to include
@@ -621,5 +633,48 @@ def do_PCA_for_numpy_array(X_train, X_test, X_final_test, target_dim):
     logger.info(f"Reduced dimensions to {X_train_pca.shape[1]} columns after PCA.")
     
     return X_train_pca, X_test_pca, X_final_test_pca
+
+def _get_llm_annotations(df, split, include_A_B, only_gemini, only_llama):
+    # load split annotations
+    if split == "train":
+        annotations_path = "src/annotate/combined/train_problems_with_annotations.csv"
+    elif split == "test":
+        annotations_path = "src/annotate/combined/test_problems_with_annotations.csv"
+    else:
+        raise ValueError("Invalid split. Use 'train' or 'test'.")
     
+    pd_annotations = pd.read_csv(annotations_path)
+    # merge with df
+    filtered_df = pd_annotations.merge(df['problem_num'], on="problem_num", how="inner").reset_index(drop=True)
+    logger.info(f"Filtered - {len(filtered_df)} rows based on problem_num.")
+
+    # columns problem_num,A,B,PVW__val_A__gemini,PVW__val_B__gemini,PVW__prob_A_better__gemini,PVW__A_over_B__gemini,PVW__diff_A_B__gemini,PVW__val_A__llama,PVW__val_B__llama,PVW__prob_A_better__llama,PVW__A_over_B__llama,PVW__diff_A_B__llama
+    selected_columns = [
+        "PVW__val_A__gemini", "PVW__val_B__gemini", "PVW__prob_A_better__gemini", "PVW__A_over_B__gemini", "PVW__diff_A_B__gemini",
+        "PVW__val_A__llama", "PVW__val_B__llama", "PVW__prob_A_better__llama", "PVW__A_over_B__llama", "PVW__diff_A_B__llama"
+    ]
     
+    if only_gemini:
+        selected_columns = [col for col in selected_columns if "gemini" in col]
+    elif only_llama:
+        selected_columns = [col for col in selected_columns if "llama" in col]
+
+    if include_A_B:
+        selected_columns += ["A", "B"]
+    
+    # filter columns
+    filtered_df = filtered_df[selected_columns]
+
+    if include_A_B:
+        # rename A and B columns to "Offer A" and "Offer B"
+        filtered_df.rename(columns={"A": "Offer A", "B": "Offer B"}, inplace=True)
+        
+    # fillna in ratio column with large number - 100
+    ratio_columns = [col for col in filtered_df.columns if "ratio" in col or "over" in col]
+    for col in ratio_columns:
+        filtered_df[col] = filtered_df[col].fillna(100)
+        
+    # log n columns
+    logger.info(f"Number of columns: {len(filtered_df.columns)}")
+    
+    return filtered_df

@@ -101,7 +101,7 @@ def plot_mse(log_path):
 
         ax.set_title(split.replace("_mse", "").capitalize())
         ax.set_xlabel("Experiment")
-        ax.set_ylim(0, 0.1)
+        ax.set_ylim(0, 0.11)
         ax.axhline(y=0.05, color='grey', linestyle='--', linewidth=1)
         ax.axhline(y=0.04, color='grey', linestyle='--', linewidth=1)
         ax.axhline(y=0.03, color='grey', linestyle='--', linewidth=1)
@@ -200,7 +200,7 @@ def plot_mse_by_model_family(log_path: str):
         plt.title(f"Test MSE: {fam}")
         plt.xlabel("Experiment")
         plt.ylabel("MSE")
-        plt.ylim(0, 0.1)
+        plt.ylim(0, 0.11)
         plt.xticks(rotation=90)
         
         # Manually create legend handles
