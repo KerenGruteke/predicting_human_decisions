@@ -7,3 +7,11 @@ __pycache__
 *.Rproj.user
 
 *rawData_Comp_All.csv
+
+*.joblib
+*.safetensors
+*.tabstarcheckpoint
+*adapter_config.json
+.tabstar_checkpoint/*
+src/results/xgboost_enrich_key_words_only_diff/xgboost.joblib
+src/results/xgboost_tfidf_by_A/xgboost_vectorizer.joblib

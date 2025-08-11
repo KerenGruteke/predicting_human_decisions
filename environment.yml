@@ -22,6 +22,7 @@ dependencies:
   - jupyter
   - transformers
   - spacy
+  - scikit-learn
   - pip
   - pip:
     - juliacall
