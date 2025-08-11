@@ -33,10 +33,13 @@ model_colors = {
 def _sort_by_staretgy(df):
     def strategy_sort_key(series: pd.Series) -> pd.Series:
         return series.map(lambda s: (
+            5 if "ensemble" in s else
             4 if "include_A_B" in s else
+            4 if "raw_A_B" in s else
             3 if "A_B_only" in s else
-            1 if "tfidf" in s else
+            1.1 if "tfidf" in s else
             0 if "length" in s else
+            2.1 if "llm" in s else
             2
         ))
 
@@ -77,7 +80,7 @@ def plot_mse(log_path):
 
     # Setup subplots
     splits = ["train_mse", "test_mse"]
-    fig, axs = plt.subplots(1, 2, figsize=(18, 10), sharey=True)
+    fig, axs = plt.subplots(1, 2, figsize=(24, 12), sharey=True)
 
     for i, split in enumerate(splits):
         ax = axs[i]
@@ -180,7 +183,7 @@ def plot_mse_by_model_family(log_path: str):
         # remove the family name from the strategy for plotting
         df_fam["strategy"] = df_fam["strategy"].str.split(" | ").str[0]
 
-        plt.figure(figsize=(9, 10))
+        plt.figure(figsize=(9, 12))
         plt.scatter(
             df_fam["strategy"], df_fam["mse"],
             c=colors, s=sizes, alpha=0.7, edgecolors="black", linewidths=lw

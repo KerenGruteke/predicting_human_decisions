@@ -1,6 +1,7 @@
 import pandas as pd
 import joblib
 from sklearn.model_selection import train_test_split
+from loguru import logger
 
 LABEL_COL = 'A_rates'
 
@@ -17,7 +18,7 @@ def load_and_prepare_data(data_path):
     return df
 
 
-def split_data(df, val_size=0, test_size=0.1, random_state=42):
+def split_data(df, val_size=0, test_size=0.1, random_state=42, exp_name=None):
     # First split: test set
     train_val_data, test_data = train_test_split(df, test_size=test_size, random_state=random_state)
 
@@ -27,6 +28,16 @@ def split_data(df, val_size=0, test_size=0.1, random_state=42):
     # # Second split: validation from remaining data
     # train_data, val_data = train_test_split(train_val_data, test_size=val_ratio_adjusted, random_state=random_state)
 
+    if "tabstar_final" in exp_name:
+        # For final training, we use all data as train_data
+        train_val_data = df.copy()
+        logger.warning(f"Using all data for training in {exp_name}. No validation set created.")
+        # log n rows in train_val_data
+        logger.info(f"Total training data rows: {len(train_val_data)}")
+        return train_val_data, test_data
+
+    # log n rows in train_val_data
+    logger.info(f"Total training/validation data rows: {len(train_val_data)}")
     return train_val_data, test_data
 
 def save_preds_to_csv(final_test_data, final_preds, output_dir, exp_name, model_name):

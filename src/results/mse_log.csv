@@ -268,4 +268,5 @@ datetime,model_name,train_mse,test_mse,exp_name
 2025-08-11T14:29:32,tabstar,0.074562052123576,0.073141901075575,tabstar_llm_annotations_values_and_prob_include_A_B
 2025-08-11T14:29:56,tabstar,0.0742234139327061,0.0727773007615407,tabstar_llm_annotations_values_and_prob_include_A_B
 2025-08-11T14:32:44,tabstar,0.0748591709109883,0.0728554165956709,tabstar_gemini_annotations_values_and_prob_include_A_B
-2025-08-11T14:32:53,tabstar,0.07529598490715028,0.07380461354361639,tabstar_llama_annotations_values_and_prob_include_A_B
+2025-08-11T14:32:53,tabstar,0.0752959849071502,0.0738046135436163,tabstar_llama_annotations_values_and_prob_include_A_B
+2025-08-11T15:11:16,tabstar,0.009128894366409462,0.01061481941832876,tabstar_final | all-mpnet-base-v2

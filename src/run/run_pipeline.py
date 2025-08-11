@@ -20,7 +20,7 @@ def run_pipeline(exp_name, model_name, vectorize_type=None, embedding_type=None,
 
     # Load and prepare data
     df = load_and_prepare_data(TRAIN_PROBLEMS_PATH)
-    train_data, test_data = split_data(df)
+    train_data, test_data = split_data(df, exp_name=exp_name)
     final_test_data = load_and_prepare_data(TEST_PROBLEMS_PATH)
 
     # Process data
@@ -225,13 +225,18 @@ if __name__ == "__main__":
     # for model_name in ["ridge", "xgboost", "random_forest", "tabpfn", "tabstar"]:
     #     run_pipeline(exp_name=f"{model_name}_llm_annotations_values_and_prob", model_name=model_name, enrich_type="llm_annotations_values_and_prob")
 
-    run_pipeline(exp_name="tabstar_gemini_annotations_values_and_prob_include_A_B", model_name="tabstar", enrich_type="gemini_annotations_values_and_prob_include_A_B")
-    run_pipeline(exp_name="tabstar_llama_annotations_values_and_prob_include_A_B", model_name="tabstar", enrich_type="llama_annotations_values_and_prob_include_A_B")
+    # run_pipeline(exp_name="tabstar_gemini_annotations_values_and_prob_include_A_B", model_name="tabstar", enrich_type="gemini_annotations_values_and_prob_include_A_B")
+    # run_pipeline(exp_name="tabstar_llama_annotations_values_and_prob_include_A_B", model_name="tabstar", enrich_type="llama_annotations_values_and_prob_include_A_B")
 
+    # ---------------------
+    # Final training on all train data
+    # ---------------------
+    
+    run_pipeline(exp_name="tabstar_final", model_name="tabstar", enrich_type="not_sure_key_words_include_A_B", embed_model="all-mpnet-base-v2")
 
     # ---------------------
     # Plot MSE
     # ---------------------
     
-    plot_mse(f"{OUTPUT_DIR}/mse_log.csv")
-    plot_mse_by_model_family(f"{OUTPUT_DIR}/mse_log.csv")
+    # plot_mse(f"{OUTPUT_DIR}/mse_log.csv")
+    # plot_mse_by_model_family(f"{OUTPUT_DIR}/mse_log.csv")
