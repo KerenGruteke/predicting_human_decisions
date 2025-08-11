@@ -34,7 +34,7 @@ for (prob in 1:nrow(all_data)) {
   Amb = all_data$Amb[prob]
   Corr = all_data$Corr[prob]
   
-  feats_tmp = get_PF_Features(Ha, pHa, La, LotShapeA, LotNumA, 
+  feats_tmp = c(Ha, pHa, La, LotShapeA, LotNumA, 
                               Hb, pHb, Lb, LotShapeB, LotNumB, 
                               Amb, Corr,
                               nBlocks = 5, nTrials = 25, firstFeedbackBlock = 2)
