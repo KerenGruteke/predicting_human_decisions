@@ -179,8 +179,8 @@ def get_annotations_for(df_with_problems: pd.DataFrame, annotations_csv_paths):
 if __name__ == "__main__":
     # Paths to your per‑task annotation CSVs (can be one or many)
     ann_paths = [
-        "src/annotate/train_problems_prob_and_value_for_winning_results.csv",
-        "src/annotate/test_problems_prob_and_value_for_winning_results.csv",
+        "src/annotate/train_problems_prob_and_value_for_winning_gemini_results.csv",
+        "src/annotate/test_problems_prob_and_value_for_winning_gemini_results.csv",
         "src/annotate/train_problems_prob_and_value_for_winning_llama_results.csv",
         "src/annotate/test_problems_prob_and_value_for_winning_llama_results.csv",
         # add more task files as you generate them
