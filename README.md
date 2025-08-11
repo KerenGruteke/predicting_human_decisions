@@ -2,10 +2,6 @@
 
 A machine learning project for predicting human decision-making behavior in risky choice tasks using both traditional behavioral models and modern embedding-based approaches.
 
-## Overview
-
-This project implements and evaluates various machine learning models to predict human choices in decision-making tasks involving risk and uncertainty. The research builds upon behavioral economics literature, particularly the BEAST-GB (Behavioral, Economic, And Social Tuning - Gradient Boosting) model, while exploring novel approaches using text embeddings and large language model annotations.
-
 ## Dataset
 
 The project uses **900 training problems** and **100 test problems**:
