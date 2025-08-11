@@ -1,0 +1,201 @@
+datetime,model_name,train_mse,test_mse,exp_name
+2025-08-06T15:56:02,ridge,0.0265000047150303,0.0444876905613987,ridge_tfidf_by_A
+2025-08-06T15:56:02,ridge,0.0252918167332047,0.0608048925984236,ridge_tfidf_by_B
+2025-08-06T15:56:03,ridge,0.0266474959490931,0.0589880899536949,ridge_tfidf_by_A_and_B
+2025-08-06T15:56:03,xgboost,0.0230470065500086,0.0583463948530796,xgboost_tfidf_by_A
+2025-08-06T15:56:04,xgboost,0.0209043410000546,0.0718175723834714,xgboost_tfidf_by_B
+2025-08-06T15:56:04,xgboost,0.016960578378627,0.0611600235137778,xgboost_tfidf_by_A_and_B
+2025-08-06T15:56:05,random_forest,0.0359592664670453,0.0574504033811291,random_forest_tfidf_by_A
+2025-08-06T15:56:05,random_forest,0.0290948419482851,0.0650215820070232,random_forest_tfidf_by_B
+2025-08-06T15:56:06,random_forest,0.0268688287385396,0.0608680759878203,random_forest_tfidf_by_A_and_B
+2025-08-06T15:56:14,ridge,0.0451524078594114,0.0502995666299989,ridge_embed_by_A | all-MiniLM-L6-v2
+2025-08-06T15:56:22,ridge,0.0496058459185391,0.0656109850411733,ridge_embed_by_B | all-MiniLM-L6-v2
+2025-08-06T15:56:30,ridge,0.053101538394229,0.0624976961151508,ridge_embed_by_A_and_B | all-MiniLM-L6-v2
+2025-08-06T15:56:45,ridge,0.03012274808707,0.0414282119418552,ridge_embed_A_minus_B | all-MiniLM-L6-v2
+2025-08-06T15:56:54,xgboost,0.0017321345881301,0.0490385114262393,xgboost_embed_by_A | all-MiniLM-L6-v2
+2025-08-06T15:57:03,xgboost,0.0010602501549372,0.0681253279977181,xgboost_embed_by_B | all-MiniLM-L6-v2
+2025-08-06T15:57:11,xgboost,0.0001901313336869,0.0672619213647854,xgboost_embed_by_A_and_B | all-MiniLM-L6-v2
+2025-08-06T15:57:27,xgboost,4.070941466784044e-05,0.0457423601793827,xgboost_embed_A_minus_B | all-MiniLM-L6-v2
+2025-08-06T15:57:35,random_forest,0.0094388094395772,0.0475305717529897,random_forest_embed_by_A | all-MiniLM-L6-v2
+2025-08-06T15:57:43,random_forest,0.0099402626827864,0.061647804821041,random_forest_embed_by_B | all-MiniLM-L6-v2
+2025-08-06T15:57:52,random_forest,0.010365255378824,0.0645624194144075,random_forest_embed_by_A_and_B | all-MiniLM-L6-v2
+2025-08-06T15:58:10,random_forest,0.0081303206046615,0.0566316603450603,random_forest_embed_A_minus_B | all-MiniLM-L6-v2
+2025-08-06T15:58:28,ridge,0.0359196504532245,0.0358171688484294,ridge_enrich_key_words | all-MiniLM-L6-v2
+2025-08-06T15:58:46,xgboost,0.0001037342704275,0.0415620403820516,xgboost_enrich_key_words | all-MiniLM-L6-v2
+2025-08-06T15:59:05,random_forest,0.0078399808327527,0.0411810559158994,random_forest_enrich_key_words | all-MiniLM-L6-v2
+2025-08-06T15:59:29,tabpfn,0.0345342195720549,0.0398856675283607,tabpfn_enrich_key_words | all-MiniLM-L6-v2
+2025-08-06T16:01:39,tabstar,0.0367345951976754,0.0431025192950169,tabstar_enrich_key_words | all-MiniLM-L6-v2
+2025-08-06T16:04:58,tabstar,0.0152761413855707,0.0271584665160046,tabstar_enrich_key_words_include_A_B | all-MiniLM-L6-v2
+2025-08-06T16:06:00,tabstar,0.0290000070041491,0.0355087956021891,tabstar_enrich_key_words_diff_include_A_B | all-MiniLM-L6-v2
+2025-08-06T16:06:39,tabstar,0.0151854267304841,0.0217309382936027,tabstar_enrich_10_key_words_include_A_B | all-MiniLM-L6-v2
+2025-08-06T16:06:59,ridge,0.0413427258503529,0.037991431860055,ridge_enrich_key_words_only_diff | all-MiniLM-L6-v2
+2025-08-06T16:07:18,xgboost,0.0003414031672548,0.046168897610201,xgboost_enrich_key_words_only_diff | all-MiniLM-L6-v2
+2025-08-06T16:07:36,random_forest,0.0082349586315269,0.0496079797607873,random_forest_enrich_key_words_only_diff | all-MiniLM-L6-v2
+2025-08-06T16:07:57,tabpfn,0.0376454814412161,0.0403368394613754,tabpfn_enrich_key_words_only_diff | all-MiniLM-L6-v2
+2025-08-06T16:08:49,tabstar,0.0431960402094802,0.0395390169419182,tabstar_enrich_key_words_only_diff | all-MiniLM-L6-v2
+2025-08-06T16:09:08,ridge,0.055896468948765,0.0437998975181241,ridge_enrich_10_key_words | all-MiniLM-L6-v2
+2025-08-06T16:09:26,xgboost,0.0009102830229031,0.0529280599145211,xgboost_enrich_10_key_words | all-MiniLM-L6-v2
+2025-08-06T16:09:45,random_forest,0.0087276467099487,0.0568829810964621,random_forest_enrich_10_key_words | all-MiniLM-L6-v2
+2025-08-06T16:10:04,tabpfn,0.0407220715098557,0.045324755903504,tabpfn_enrich_10_key_words | all-MiniLM-L6-v2
+2025-08-06T16:10:35,tabstar,0.0490643100510923,0.0521513792224062,tabstar_enrich_10_key_words | all-MiniLM-L6-v2
+2025-08-06T16:10:48,tabstar,0.0127125989760781,0.0219516834067636,tabstar_A_B_only
+2025-08-06T16:28:26,tabpfn,0.0377404379850597,0.0524308852615764,tabpfn_tfidf_by_A
+2025-08-06T16:28:35,tabpfn,0.0486644505351852,0.0680457759889807,tabpfn_tfidf_by_B
+2025-08-06T16:28:43,tabpfn,0.0437887994487102,0.0701520084673709,tabpfn_tfidf_by_A_and_B
+2025-08-06T16:29:57,tabpfn,0.0455101892190021,0.0498012164007168,tabpfn_embed_by_A | all-MiniLM-L6-v2
+2025-08-06T16:30:13,tabpfn,0.0543812550194695,0.068558360240205,tabpfn_embed_by_B | all-MiniLM-L6-v2
+2025-08-06T16:30:28,tabpfn,0.0562651013072135,0.0620717522175828,tabpfn_embed_by_A_and_B | all-MiniLM-L6-v2
+2025-08-06T16:30:52,tabpfn,0.031873183027018,0.0446619607675188,tabpfn_embed_A_minus_B | all-MiniLM-L6-v2
+2025-08-06T16:37:44,tabstar,0.0736618937977449,0.070489124595854,tabstar_tfidf_by_A
+2025-08-06T16:39:31,tabstar,0.0750713831644882,0.0724122097820706,tabstar_tfidf_by_B
+2025-08-06T16:42:12,tabstar,0.066785874060878,0.0713932297823164,tabstar_tfidf_by_A_and_B
+2025-08-06T16:46:51,tabstar,0.0425485242331846,0.0488177206314934,tabstar_embed_by_A | all-MiniLM-L6-v2
+2025-08-06T16:48:25,tabstar,0.0680991987948947,0.0679646915128495,tabstar_embed_by_B | all-MiniLM-L6-v2
+2025-08-06T16:50:00,tabstar,0.0678612429538773,0.0669809086916181,tabstar_embed_by_A_and_B | all-MiniLM-L6-v2
+2025-08-06T16:52:06,tabstar,0.0407061770128394,0.0438147766968276,tabstar_embed_A_minus_B | all-MiniLM-L6-v2
+2025-08-06T17:55:03,ridge,0.0207528379912558,0.0292700590609143,ridge_embed_A_minus_B | all-mpnet-base-v2
+2025-08-06T17:55:20,xgboost,1.3815619197554811e-05,0.0313982185931538,xgboost_embed_A_minus_B | all-mpnet-base-v2
+2025-08-06T17:55:38,random_forest,0.0065915001313604,0.037546112252887,random_forest_embed_A_minus_B | all-mpnet-base-v2
+2025-08-06T17:59:08,tabpfn,0.0236389240801897,0.0272972055354954,tabpfn_embed_A_minus_B | all-distilroberta-v1
+2025-08-06T18:02:49,tabstar,0.0362463536310858,0.0369997066720326,tabstar_embed_A_minus_B | all-distilroberta-v1
+2025-08-06T18:03:16,ridge,0.0219777479179339,0.0266012072677493,ridge_embed_A_minus_B | all-distilroberta-v1
+2025-08-06T18:03:34,xgboost,1.6103442478497244e-05,0.0389162630461605,xgboost_embed_A_minus_B | all-distilroberta-v1
+2025-08-06T18:03:50,random_forest,0.00687268542247,0.0424579621492471,random_forest_embed_A_minus_B | all-distilroberta-v1
+2025-08-06T18:04:51,tabpfn,0.024014726769771,0.027770707736095,tabpfn_embed_A_minus_B | all-distilroberta-v1
+2025-08-06T18:08:15,tabstar,0.0402645430889173,0.0492442187531789,tabstar_embed_A_minus_B | all-distilroberta-v1
+2025-08-06T18:10:15,ridge,0.0451524084705871,0.0502995633343662,ridge_embed_by_A | all-MiniLM-L6-v2
+2025-08-06T18:10:23,xgboost,0.0017321345881301,0.0490385114262393,xgboost_embed_by_A | all-MiniLM-L6-v2
+2025-08-06T18:10:31,random_forest,0.0094388094395772,0.0475305717529897,random_forest_embed_by_A | all-MiniLM-L6-v2
+2025-08-06T18:11:14,tabpfn,0.0454803322461922,0.0497907541659981,tabpfn_embed_by_A | all-MiniLM-L6-v2
+2025-08-06T18:13:06,tabstar,0.0498190473074689,0.0526834935427374,tabstar_embed_by_A | all-MiniLM-L6-v2
+2025-08-06T18:13:14,ridge,0.0364757942068019,0.0406714923246173,ridge_embed_by_A | all-mpnet-base-v2
+2025-08-06T18:13:24,xgboost,0.0016533644572355,0.0390009025377131,xgboost_embed_by_A | all-mpnet-base-v2
+2025-08-06T18:13:33,random_forest,0.0084039325003715,0.0381357781849079,random_forest_embed_by_A | all-mpnet-base-v2
+2025-08-06T18:13:48,tabpfn,0.0294148431918741,0.047354525040114,tabpfn_embed_by_A | all-mpnet-base-v2
+2025-08-06T18:16:17,tabstar,0.0543634868023719,0.0497123730395237,tabstar_embed_by_A | all-mpnet-base-v2
+2025-08-06T18:16:27,ridge,0.0388640581467586,0.0432438762400942,ridge_embed_by_A | all-distilroberta-v1
+2025-08-06T18:16:36,xgboost,0.0016843452883764,0.0447811829923826,xgboost_embed_by_A | all-distilroberta-v1
+2025-08-06T18:16:45,random_forest,0.0087736300546023,0.0433734937084693,random_forest_embed_by_A | all-distilroberta-v1
+2025-08-06T18:17:00,tabpfn,0.0286006301942452,0.0403382929995838,tabpfn_embed_by_A | all-distilroberta-v1
+2025-08-06T18:18:57,tabstar,0.0669341073421195,0.0566820320351918,tabstar_embed_by_A | all-distilroberta-v1
+2025-08-06T18:24:04,ridge,0.0271062579001405,0.0303045775993083,ridge_enrich_key_words | all-distilroberta-v1
+2025-08-06T18:34:04,xgboost,3.907913250929897e-05,0.043891555781243,xgboost_enrich_key_words | all-distilroberta-v1
+2025-08-06T18:34:23,random_forest,0.0064258631863942,0.0416004981404614,random_forest_enrich_key_words | all-distilroberta-v1
+2025-08-06T18:35:07,tabpfn,0.0260452246663236,0.0324215631846596,tabpfn_enrich_key_words | all-distilroberta-v1
+2025-08-07T09:46:01,ridge,0.0260483485859885,0.0276423534837593,ridge_enrich_key_words | all-mpnet-base-v2
+2025-08-07T09:46:20,xgboost,5.997716496976179e-05,0.0336340855724539,xgboost_enrich_key_words | all-mpnet-base-v2
+2025-08-07T09:46:39,random_forest,0.0061651801477309,0.0349323256774886,random_forest_enrich_key_words | all-mpnet-base-v2
+2025-08-07T09:47:23,tabpfn,0.0245160055032745,0.027311854430372,tabpfn_enrich_key_words | all-mpnet-base-v2
+2025-08-07T09:49:32,tabstar,0.0265708315445447,0.0307045567774737,tabstar_enrich_key_words | all-mpnet-base-v2
+2025-08-07T09:51:56,tabstar,0.0233666548675102,0.0319011971599576,tabstar_enrich_key_words_include_A_B | all-mpnet-base-v2
+2025-08-07T09:52:17,ridge,0.0271060883218761,0.0303005061488363,ridge_enrich_key_words | all-distilroberta-v1
+2025-08-07T09:52:36,xgboost,4.920779918665776e-05,0.0405353521776778,xgboost_enrich_key_words | all-distilroberta-v1
+2025-08-07T09:52:54,random_forest,0.0064314214553562,0.0405613105628296,random_forest_enrich_key_words | all-distilroberta-v1
+2025-08-07T09:53:19,tabpfn,0.0259339311989297,0.0326018397874907,tabpfn_enrich_key_words | all-distilroberta-v1
+2025-08-07T09:55:38,tabstar,0.0292233577570703,0.0334532463812828,tabstar_enrich_key_words | all-distilroberta-v1
+2025-08-07T09:57:08,tabstar,0.0383125989699595,0.0368280027341552,tabstar_enrich_key_words_include_A_B | all-distilroberta-v1
+2025-08-07T10:09:47,tabstar,0.0094638119370325,0.0315663494448529,tabstar_enrich_risk_key_words_include_A_B | all-MiniLM-L6-v2
+2025-08-07T10:10:05,tabpfn,0.0235373289239925,0.0266153700543033,tabpfn_embed_A_minus_B | all-mpnet-base-v2
+2025-08-07T10:11:09,tabstar,0.0289277001086844,0.0321919315289126,tabstar_enrich_risk_key_words_include_A_B | all-mpnet-base-v2
+2025-08-07T10:12:18,tabstar,0.0393494079251008,0.0352402385222249,tabstar_enrich_risk_key_words_include_A_B | all-distilroberta-v1
+2025-08-07T10:12:46,tabstar,0.0535406411697246,0.0492552952035268,tabstar_embed_A_minus_B | all-mpnet-base-v2
+2025-08-07T10:14:04,ridge,0.0436155491940012,0.0413687139824857,ridge_enrich_10_key_words | all-mpnet-base-v2
+2025-08-07T10:14:21,xgboost,0.0008940827836129,0.04137282070155,xgboost_enrich_10_key_words | all-mpnet-base-v2
+2025-08-07T10:14:40,random_forest,0.0074640119625553,0.0437188466453359,random_forest_enrich_10_key_words | all-mpnet-base-v2
+2025-08-07T10:14:59,tabpfn,0.0360382856585678,0.0389959150209058,tabpfn_enrich_10_key_words | all-mpnet-base-v2
+2025-08-07T10:15:33,tabstar,0.0370589711247182,0.0396640438981188,tabstar_enrich_10_key_words | all-mpnet-base-v2
+2025-08-07T10:15:52,ridge,0.0471137858015659,0.0451342409221936,ridge_enrich_10_key_words | all-distilroberta-v1
+2025-08-07T10:16:10,xgboost,0.0010858153161116,0.0480957268409353,xgboost_enrich_10_key_words | all-distilroberta-v1
+2025-08-07T10:16:28,random_forest,0.0076403869299643,0.0473899720996945,random_forest_enrich_10_key_words | all-distilroberta-v1
+2025-08-07T10:16:49,tabpfn,0.0399477610162714,0.0410165755074426,tabpfn_enrich_10_key_words | all-distilroberta-v1
+2025-08-07T10:17:21,tabstar,0.0402135036290207,0.0439243808402617,tabstar_enrich_10_key_words | all-distilroberta-v1
+2025-08-07T10:18:51,tabstar,0.0345255762583251,0.0377138784872823,tabstar_enrich_key_words_include_A_B | all-mpnet-base-v2
+2025-08-07T10:19:40,tabstar,0.0293701313737156,0.030444105134936,tabstar_enrich_key_words_diff_include_A_B | all-mpnet-base-v2
+2025-08-07T10:20:18,tabstar,0.0165226393844527,0.0228093605529626,tabstar_enrich_10_key_words_include_A_B | all-mpnet-base-v2
+2025-08-07T10:21:51,tabstar,0.0379196420266825,0.033833065935275,tabstar_enrich_key_words_include_A_B | all-distilroberta-v1
+2025-08-07T10:22:59,tabstar,0.0186977188320954,0.0233701779591374,tabstar_enrich_key_words_diff_include_A_B | all-distilroberta-v1
+2025-08-07T10:37:03,tabstar,0.0453226093702263,0.0450525689188639,tabstar_enrich_10_key_words | all-distilroberta-v1
+2025-08-07T10:38:31,tabstar,0.0071552400409597,0.0224180913354052,tabstar_enrich_10_key_words_include_A_B | all-distilroberta-v1
+2025-08-07T10:48:29,ridge,0.044357440201461,0.0425985596262831,ridge_enrich_fear_bravery_key_words | all-mpnet-base-v2
+2025-08-07T10:48:47,xgboost,0.0002953473400252,0.0447351654721995,xgboost_enrich_fear_bravery_key_words | all-mpnet-base-v2
+2025-08-07T10:49:06,random_forest,0.0080377325352578,0.0455925219077347,random_forest_enrich_fear_bravery_key_words | all-mpnet-base-v2
+2025-08-07T10:49:26,tabpfn,0.030314581978258,0.0403144466858938,tabpfn_enrich_fear_bravery_key_words | all-mpnet-base-v2
+2025-08-07T10:50:09,tabstar,0.0430966221636989,0.0508271513811457,tabstar_enrich_fear_bravery_key_words | all-mpnet-base-v2
+2025-08-07T10:50:28,ridge,0.0428342431404826,0.0420709200696847,ridge_enrich_fear_bravery_key_words | all-distilroberta-v1
+2025-08-07T10:50:46,xgboost,0.0002471729296435,0.04979072244202,xgboost_enrich_fear_bravery_key_words | all-distilroberta-v1
+2025-08-07T10:51:04,random_forest,0.00758818260496,0.0529076504592444,random_forest_enrich_fear_bravery_key_words | all-distilroberta-v1
+2025-08-07T10:51:09,ridge,0.0281118488222982,0.0277995397800491,ridge_enrich_risk_key_words | all-mpnet-base-v2
+2025-08-07T10:51:24,tabpfn,0.0324281397705221,0.0382992720804656,tabpfn_enrich_fear_bravery_key_words | all-distilroberta-v1
+2025-08-07T10:51:27,xgboost,0.0001160843723582,0.0336716547313608,xgboost_enrich_risk_key_words | all-mpnet-base-v2
+2025-08-07T10:51:46,random_forest,0.006256095892019,0.0372909932092306,random_forest_enrich_risk_key_words | all-mpnet-base-v2
+2025-08-07T10:52:08,tabstar,0.0370883456314365,0.0491582424488994,tabstar_enrich_fear_bravery_key_words | all-distilroberta-v1
+2025-08-07T10:52:09,tabpfn,0.0239048144840318,0.0275305515208766,tabpfn_enrich_risk_key_words | all-mpnet-base-v2
+2025-08-07T10:52:25,ridge,0.0536618400025564,0.0472676276765395,ridge_enrich_fear_bravery_key_words | all-MiniLM-L6-v2
+2025-08-07T10:52:43,xgboost,0.0003988438738381,0.0468285667999665,xgboost_enrich_fear_bravery_key_words | all-MiniLM-L6-v2
+2025-08-07T10:53:01,random_forest,0.009261861843197,0.0543482807755453,random_forest_enrich_fear_bravery_key_words | all-MiniLM-L6-v2
+2025-08-07T10:53:19,tabstar,0.032667922414885,0.0371507320822309,tabstar_enrich_risk_key_words | all-mpnet-base-v2
+2025-08-07T10:53:20,tabpfn,0.041403878666703,0.0436779802707233,tabpfn_enrich_fear_bravery_key_words | all-MiniLM-L6-v2
+2025-08-07T10:53:37,ridge,0.0305777260238721,0.0307453308957251,ridge_enrich_risk_key_words | all-distilroberta-v1
+2025-08-07T10:53:56,xgboost,9.846302407978146e-05,0.0400217783974793,xgboost_enrich_risk_key_words | all-distilroberta-v1
+2025-08-07T10:54:08,tabstar,0.0413341724098031,0.0599462744146264,tabstar_enrich_fear_bravery_key_words | all-MiniLM-L6-v2
+2025-08-07T10:54:14,random_forest,0.0066457295426311,0.0412117592718635,random_forest_enrich_risk_key_words | all-distilroberta-v1
+2025-08-07T10:54:36,tabpfn,0.0251798455482314,0.0283534563453736,tabpfn_enrich_risk_key_words | all-distilroberta-v1
+2025-08-07T10:55:59,tabstar,0.0311097662079774,0.0292899099092402,tabstar_enrich_risk_key_words | all-distilroberta-v1
+2025-08-07T10:56:17,ridge,0.0395349798458971,0.0357039299171638,ridge_enrich_risk_key_words | all-MiniLM-L6-v2
+2025-08-07T10:56:37,xgboost,0.0001765266197917,0.0370476171809277,xgboost_enrich_risk_key_words | all-MiniLM-L6-v2
+2025-08-07T10:56:56,random_forest,0.0080579775356036,0.0430565346357907,random_forest_enrich_risk_key_words | all-MiniLM-L6-v2
+2025-08-07T10:57:18,tabpfn,0.0333377002297532,0.0371082118048765,tabpfn_enrich_risk_key_words | all-MiniLM-L6-v2
+2025-08-07T10:58:17,ridge,0.0351329426236199,0.0337347006622563,ridge_enrich_optimism_key_words | all-mpnet-base-v2
+2025-08-07T10:58:35,xgboost,0.0002486173287788,0.0402497655297419,xgboost_enrich_optimism_key_words | all-mpnet-base-v2
+2025-08-07T10:58:51,tabstar,0.0319057557064589,0.0398101573583814,tabstar_enrich_risk_key_words | all-MiniLM-L6-v2
+2025-08-07T10:58:54,random_forest,0.0067155675012893,0.0377225589837181,random_forest_enrich_optimism_key_words | all-mpnet-base-v2
+2025-08-07T10:59:14,tabpfn,0.0286261842492018,0.0316834111470228,tabpfn_enrich_optimism_key_words | all-mpnet-base-v2
+2025-08-07T10:59:54,tabstar,0.0366346285542367,0.0413501835760805,tabstar_enrich_optimism_key_words | all-mpnet-base-v2
+2025-08-07T11:00:13,ridge,0.0354952738241647,0.0352507895588312,ridge_enrich_optimism_key_words | all-distilroberta-v1
+2025-08-07T11:00:31,xgboost,0.0003182668030224,0.0391174950854792,xgboost_enrich_optimism_key_words | all-distilroberta-v1
+2025-08-07T11:00:49,random_forest,0.0068772618540597,0.0443897582102121,random_forest_enrich_optimism_key_words | all-distilroberta-v1
+2025-08-07T11:01:09,tabpfn,0.0274826013154598,0.0337842350522915,tabpfn_enrich_optimism_key_words | all-distilroberta-v1
+2025-08-07T11:01:50,tabstar,0.035267261317126,0.0389532855349116,tabstar_enrich_optimism_key_words | all-distilroberta-v1
+2025-08-07T11:02:09,ridge,0.047214006229534,0.043225299800164,ridge_enrich_optimism_key_words | all-MiniLM-L6-v2
+2025-08-07T11:02:26,xgboost,0.0003030225660374,0.048969470121804,xgboost_enrich_optimism_key_words | all-MiniLM-L6-v2
+2025-08-07T11:02:44,random_forest,0.0086505663312752,0.0494405434052525,random_forest_enrich_optimism_key_words | all-MiniLM-L6-v2
+2025-08-07T11:03:03,tabpfn,0.0364416095374846,0.0437250047985839,tabpfn_enrich_optimism_key_words | all-MiniLM-L6-v2
+2025-08-07T11:03:41,tabstar,0.048355909251372,0.0486041632556915,tabstar_enrich_optimism_key_words | all-MiniLM-L6-v2
+2025-08-07T13:43:14,tabstar,0.0189258025565418,0.0303403403358989,tabstar_enrich_optimism_key_words_include_A_B | all-mpnet-base-v2
+2025-08-07T13:44:12,tabstar,0.0145218422835558,0.0252091857426116,tabstar_enrich_optimism_key_words_include_A_B | all-distilroberta-v1
+2025-08-07T13:45:12,tabstar,0.0134019163786891,0.0321412387272384,tabstar_enrich_optimism_key_words_include_A_B | all-MiniLM-L6-v2
+2025-08-07T13:59:05,tabstar,0.0299760335362887,0.0313035923656945,tabstar_enrich_key_words | all-mpnet-base-v2
+2025-08-07T14:01:13,tabstar,0.0290492588752782,0.0299311576284302,tabstar_enrich_key_words | all-distilroberta-v1
+2025-08-07T14:03:33,tabstar,0.0318377470712314,0.041068850553433,tabstar_enrich_key_words | all-MiniLM-L6-v2
+2025-08-07T14:07:38,ridge,0.0629015924886147,0.0652056739898242,ridge_enrich_not_sure_key_words | all-mpnet-base-v2
+2025-08-07T14:07:58,xgboost,0.0013815361362789,0.0723809430457229,xgboost_enrich_not_sure_key_words | all-mpnet-base-v2
+2025-08-07T14:08:18,random_forest,0.0097640577752627,0.0673554957635054,random_forest_enrich_not_sure_key_words | all-mpnet-base-v2
+2025-08-07T14:08:39,tabpfn,0.0572560372806133,0.0627609596375291,tabpfn_enrich_not_sure_key_words | all-mpnet-base-v2
+2025-08-07T14:09:12,tabstar,0.0639309449198216,0.0737332747311062,tabstar_enrich_not_sure_key_words | all-mpnet-base-v2
+2025-08-07T14:09:32,ridge,0.026051249054994,0.0276475325956344,ridge_enrich_key_words | all-mpnet-base-v2
+2025-08-07T14:09:53,xgboost,7.232635402258536e-05,0.0323979266499917,xgboost_enrich_key_words | all-mpnet-base-v2
+2025-08-07T14:10:05,tabstar,0.0125683105311175,0.0220678182042969,tabstar_enrich_not_sure_key_words_include_A_B | all-mpnet-base-v2
+2025-08-07T14:10:14,random_forest,0.0061782351872131,0.0349825780921627,random_forest_enrich_key_words | all-mpnet-base-v2
+2025-08-07T14:10:40,tabpfn,0.0245279816657482,0.0273135980119787,tabpfn_enrich_key_words | all-mpnet-base-v2
+2025-08-07T14:12:11,tabstar,0.0284025400229957,0.0292131701158815,tabstar_enrich_key_words_include_A_B | all-mpnet-base-v2
+2025-08-07T14:12:33,tabstar,0.0278117511543747,0.0289290777146495,tabstar_enrich_key_words | all-mpnet-base-v2
+2025-08-07T14:12:55,ridge,0.0625363878270089,0.0625895898950223,ridge_enrich_not_sure_key_words | all-distilroberta-v1
+2025-08-07T14:13:05,tabstar,0.0109035120116187,0.0292473856241173,tabstar_enrich_not_sure_key_words_include_A_B | all-distilroberta-v1
+2025-08-07T14:13:15,xgboost,0.0012936598148853,0.0743742309295693,xgboost_enrich_not_sure_key_words | all-distilroberta-v1
+2025-08-07T14:13:35,random_forest,0.0095898105504758,0.0625464685749973,random_forest_enrich_not_sure_key_words | all-distilroberta-v1
+2025-08-07T14:13:57,tabpfn,0.0539314793142749,0.059816913920562,tabpfn_enrich_not_sure_key_words | all-distilroberta-v1
+2025-08-07T14:14:32,tabstar,0.0587925304662445,0.0707693692906697,tabstar_enrich_not_sure_key_words | all-distilroberta-v1
+2025-08-07T14:14:52,ridge,0.0271060883218761,0.0303005061488363,ridge_enrich_key_words | all-distilroberta-v1
+2025-08-07T14:14:53,tabstar,0.0348967977928823,0.0299004965473887,tabstar_enrich_key_words_include_A_B | all-distilroberta-v1
+2025-08-07T14:15:13,xgboost,4.920779918665776e-05,0.0405353521776778,xgboost_enrich_key_words | all-distilroberta-v1
+2025-08-07T14:15:33,random_forest,0.0064314214553562,0.0405613105628296,random_forest_enrich_key_words | all-distilroberta-v1
+2025-08-07T14:15:59,tabpfn,0.0259339311989297,0.0326018397874907,tabpfn_enrich_key_words | all-distilroberta-v1
+2025-08-07T14:17:31,tabstar,0.0115146572085265,0.0281990385516484,tabstar_enrich_not_sure_key_words_include_A_B | all-MiniLM-L6-v2
+2025-08-07T14:19:10,tabstar,0.0495636729313414,0.0474951849577162,tabstar_enrich_key_words_include_A_B | all-MiniLM-L6-v2
+2025-08-10T11:55:49,tabstar,0.0111126693802262,0.0226742355689447,tabstar_enrich_not_sure_key_words_include_A_B | all-mpnet-base-v2
+2025-08-10T12:27:00,tabstar,0.0324560202962654,0.0331667067522845,tabstar_embed_A_minus_B_enrich_not_sure_key_words_include_A_B | all-mpnet-base-v2
+2025-08-10T14:26:29,ridge,0.0752005270024498,0.0727714836881032,ridge_length
+2025-08-10T14:26:34,xgboost,0.0466097921044188,0.0906449763841943,xgboost_length
+2025-08-10T14:26:35,random_forest,0.0436804746542907,0.0944317863031111,random_forest_length
+2025-08-10T14:26:37,tabpfn,0.0748756135450288,0.0728284423633892,tabpfn_length
+2025-08-10T14:26:44,tabstar,0.07536718153388412,0.07275033207045663,tabstar_length
