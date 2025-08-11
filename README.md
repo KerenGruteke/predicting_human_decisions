@@ -4,8 +4,6 @@ A machine learning project for predicting human decision-making behavior in risk
 
 ## Dataset
 
-The project uses **900 training problems** and **100 test problems**:
-
 - **Training Set**: 900 decision problems with human choice data
 - **Test Set**: 100 decision problems for final evaluation
 
