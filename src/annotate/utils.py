@@ -21,7 +21,10 @@ def _load_existing(out_path: str) -> pd.DataFrame:
         for c in cols:
             if c not in df.columns:
                 df[c] = None
-        return df[cols]
+        existing = df[cols]
+        # drop na by 'result' to avoid empty rows
+        existing = existing.dropna(subset=['result'], how='all')
+        return existing
     return pd.DataFrame(columns=cols)
 
 def _existing_key(existing_df: pd.DataFrame, task: str):

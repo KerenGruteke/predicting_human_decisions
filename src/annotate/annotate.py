@@ -56,7 +56,7 @@ def annotate_df_by_task(
     buffered = []
     
     models = [
-        ('llama', lambda x: get_llama_response(x)),
+        # ('llama', lambda x: get_llama_response(x)),
         ('gemini', lambda x: get_gemini_response(x)),
     ]
     model_names = [name for name, _ in models]
